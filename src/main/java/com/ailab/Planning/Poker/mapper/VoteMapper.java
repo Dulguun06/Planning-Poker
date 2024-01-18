@@ -31,15 +31,8 @@ public class VoteMapper {
 
     public void dtoToEntity(VoteDTO dto, Vote vote) {
         if (dto != null && vote != null) {
-
-            Task task = new Task();
-            taskMapper.dtoToEntity(taskServices.getByTaskId(dto.getTask_id()), task);
-            vote.setTask(task);
-
-            User user = new User();
-            userMapper.dtoToEntity(userServices.getByUserName(dto.getUsername()), user);
-            vote.setUser(user);
-
+            vote.setTaskId(dto.getTask_id());
+            vote.setUsername(dto.getUsername());
             vote.setEstimation(dto.getEstimation());
         }
     }

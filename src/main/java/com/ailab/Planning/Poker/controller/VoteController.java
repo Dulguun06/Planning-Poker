@@ -31,7 +31,7 @@ public class VoteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VoteDTO> create(@Valid @RequestBody VoteDTO newVote) {
+    public ResponseEntity<VoteDTO> save(@Valid @RequestBody VoteDTO newVote) {
         return new ResponseEntity<>(voteServices.save(newVote), HttpStatus.OK);
     }
 

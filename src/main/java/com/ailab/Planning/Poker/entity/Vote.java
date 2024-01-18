@@ -1,8 +1,7 @@
 package com.ailab.Planning.Poker.entity;
 
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -10,7 +9,9 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "vote")
+@Table(name = "vote", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"task_id", "username"})
+})
 public class Vote {
 
     @Id
@@ -20,11 +21,17 @@ public class Vote {
     @Column(name = "estimation")
     private Integer estimation;
 
-    @ManyToOne
-    @JoinColumn(name = "task_id", nullable = false)
-    private Task task;
+    @Column(name = "task_id", nullable = false)
+    private Long taskId;
 
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "task_id", insertable = false, updatable = false)
+    private Task task;
+
+    @Column(name = "username", nullable = false)
+    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "username", insertable = false, updatable = false)
     private User user;
 }

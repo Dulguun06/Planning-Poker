@@ -39,7 +39,9 @@ public class VoteServices {
     public VoteDTO save(VoteDTO newVote) {
         Vote vote = new Vote();
         voteMapper.dtoToEntity(newVote, vote);
-        return voteMapper.entityToDto(voteRepository.save(vote));
+        vote = voteRepository.save(vote);
+        newVote.setId(vote.getId());
+        return newVote;
     }
 
 
