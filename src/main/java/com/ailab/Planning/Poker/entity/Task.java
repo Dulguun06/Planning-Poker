@@ -2,7 +2,6 @@ package com.ailab.Planning.Poker.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -33,7 +32,7 @@ public class Task {
     private Date due;
 
     @Column(name = "estimation")
-    private Integer estimation;
+    private int estimation;
 
     @Column(name = "username")
     private String username;

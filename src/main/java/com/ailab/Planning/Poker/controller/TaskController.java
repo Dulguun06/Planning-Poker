@@ -1,6 +1,5 @@
 package com.ailab.Planning.Poker.controller;
 
-import com.ailab.Planning.Poker.config.Config;
 import com.ailab.Planning.Poker.dto.TaskDTO;
 import com.ailab.Planning.Poker.services.TaskServices;
 import jakarta.validation.Valid;

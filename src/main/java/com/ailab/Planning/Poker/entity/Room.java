@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -23,11 +22,12 @@ public class Room {
     private String password;
 
     @Column(name = "room_name", nullable = false)
-    private String roomName;
+    private String room_name;
 
     @Column(name = "url", nullable = false)
     private String url;
 
     @OneToMany(mappedBy = "room")
     private List<Task> tasks;
+
 }

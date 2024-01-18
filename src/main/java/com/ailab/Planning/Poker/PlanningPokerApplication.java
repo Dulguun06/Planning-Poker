@@ -1,11 +1,10 @@
 package com.ailab.Planning.Poker;
 
-import com.ailab.Planning.Poker.config.Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PlanningPokerApplication extends Config {
+public class PlanningPokerApplication {
 
     public static void main(String[] args) {
 
