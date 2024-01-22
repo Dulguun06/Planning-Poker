@@ -30,7 +30,7 @@ public class RoomController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RoomDTO> create(@Valid @RequestBody Room newRoom) {
+    public ResponseEntity<RoomDTO> create(@Valid @RequestBody RoomDTO newRoom) {
         return new ResponseEntity<>(roomServices.save(newRoom), HttpStatus.OK);
     }
 

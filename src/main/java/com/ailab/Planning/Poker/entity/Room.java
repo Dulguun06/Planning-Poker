@@ -24,7 +24,7 @@ public class Room {
     @Column(name = "room_name", nullable = false)
     private String room_name;
 
-    @Column(name = "url", nullable = false)
+    @Column(name = "url", nullable = true)
     private String url;
 
     @OneToMany(mappedBy = "room")

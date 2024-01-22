@@ -13,7 +13,5 @@ public class RoomDTO {
     @NotBlank(message = "Room name should have detailed description")
     private String room_name;
 
-    @NotNull(message = "Room URL can't be null")
-    @NotBlank(message = "Room URL should have detailed description")
     private String url;
 }

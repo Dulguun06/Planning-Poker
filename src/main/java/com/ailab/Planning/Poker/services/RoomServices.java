@@ -33,8 +33,11 @@ public class RoomServices {
         return roomMapper.entityToDto(roomRepository.findById(roomId).orElse(new Room()));
     }
 
-    public RoomDTO save(Room newRoom) {
-        return roomMapper.entityToDto(roomRepository.save(newRoom));
+    public RoomDTO save(RoomDTO newRoom) {
+        Room room = new Room();
+        roomMapper.dtoToEntity(newRoom,room);
+        roomRepository.save(room);
+        return newRoom;
     }
 
     public RoomDTO update(RoomDTO newRoom, Long oldRoomId) {
