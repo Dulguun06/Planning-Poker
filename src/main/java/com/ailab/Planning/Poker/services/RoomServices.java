@@ -5,6 +5,7 @@ import com.ailab.Planning.Poker.entity.Room;
 import com.ailab.Planning.Poker.mapper.RoomMapper;
 import com.ailab.Planning.Poker.repository.RoomRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +34,19 @@ public class RoomServices {
         return roomMapper.entityToDto(roomRepository.findById(roomId).orElse(new Room()));
     }
 
-    public RoomDTO save(RoomDTO newRoom) {
-        Room room = new Room();
-        roomMapper.dtoToEntity(newRoom,room);
-        roomRepository.save(room);
-        return newRoom;
+    public ResponseEntity<String> checkPassword(Long roomId, String password) {
+        Room room = roomRepository.findById(roomId).orElse(null);
+
+        if (room != null && room.getPassword().equals(password)) {
+            return new ResponseEntity<>("Password Correct", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Incorrect password", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    public RoomDTO save(Room newRoom) {
+        roomRepository.save(newRoom);
+        return roomMapper.entityToDto(newRoom);
     }
 
     public RoomDTO update(RoomDTO newRoom, Long oldRoomId) {
