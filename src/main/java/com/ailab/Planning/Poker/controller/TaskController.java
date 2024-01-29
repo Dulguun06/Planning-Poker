@@ -40,6 +40,11 @@ public class TaskController {
         return new ResponseEntity<>(taskServices.update(updatedTask, id), HttpStatus.OK);
     }
 
+    @PutMapping("/addToRoom/{id}/{roomId}")
+    public ResponseEntity<String> addToRoom(@PathVariable Long id, @PathVariable Long roomId, @RequestParam(name = "type") String type){
+        return taskServices.addToRoom(roomId,id, type);
+    }
+
     @DeleteMapping("/{id}")
     public HttpStatus delete(@PathVariable final Long id) {
         return taskServices.delete(id);

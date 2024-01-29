@@ -2,8 +2,10 @@ package com.ailab.Planning.Poker.services;
 
 import com.ailab.Planning.Poker.dto.RoomDTO;
 import com.ailab.Planning.Poker.entity.Room;
+import com.ailab.Planning.Poker.entity.Task;
 import com.ailab.Planning.Poker.mapper.RoomMapper;
 import com.ailab.Planning.Poker.repository.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomServices {
-
+    @Autowired
+    private TaskServices taskServices;
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
@@ -34,13 +37,14 @@ public class RoomServices {
         return roomMapper.entityToDto(roomRepository.findById(roomId).orElse(new Room()));
     }
 
-    public ResponseEntity<String> checkPassword(Long roomId, String password) {
+    public Boolean checkPassword(Long roomId, String password) {
         Room room = roomRepository.findById(roomId).orElse(null);
 
         if (room != null && room.getPassword().equals(password)) {
-            return new ResponseEntity<>("Password Correct", HttpStatus.OK);
+            return true;
+
         } else {
-            return new ResponseEntity<>("Incorrect password", HttpStatus.UNAUTHORIZED);
+            return false;
         }
     }
 
@@ -69,5 +73,9 @@ public class RoomServices {
         } else {
             return HttpStatus.NOT_FOUND;
         }
+    }
+
+    public List<Task> getTasks(long roomId) {
+        return taskServices.getAllByRoomId(roomId);
     }
 }

@@ -2,9 +2,9 @@ package com.ailab.Planning.Poker.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -45,10 +45,13 @@ public class Task {
     @JoinColumn(name = "room_id" ,insertable = false, updatable = false)
     private Room room;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "username" ,insertable = false, updatable = false)
     private User user;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "task")
     private List<Vote> votes;
 }

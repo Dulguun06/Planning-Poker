@@ -1,5 +1,6 @@
 package com.ailab.Planning.Poker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,12 +23,16 @@ public class User {
     @Column(name = "image")
     private String image;
 
+    @JsonIgnore
     @ManyToMany
     Set<Room> joined_room;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Vote> votes;
 }

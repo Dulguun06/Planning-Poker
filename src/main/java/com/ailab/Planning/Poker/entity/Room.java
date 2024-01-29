@@ -1,5 +1,6 @@
 package com.ailab.Planning.Poker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,10 +25,9 @@ public class Room {
     @Column(name = "room_name", nullable = false)
     private String room_name;
 
-    @Column(name = "url", nullable = true)
+    @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Task> tasks;
-
 }

@@ -2,9 +2,9 @@ package com.ailab.Planning.Poker.controller;
 
 import com.ailab.Planning.Poker.dto.RoomDTO;
 import com.ailab.Planning.Poker.entity.Room;
+import com.ailab.Planning.Poker.entity.Task;
 import com.ailab.Planning.Poker.services.RoomServices;
 import jakarta.validation.Valid;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,11 +30,18 @@ public class RoomController {
         return new ResponseEntity<>(roomServices.getByRoomId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}/tasks")
+    public ResponseEntity<List<Task>> getTasks(@PathVariable Long id){
+        return new ResponseEntity<>(roomServices.getTasks(id),HttpStatus.OK);
+    }
+
     @PostMapping("/check-pass")
     public ResponseEntity<String> checkPassword(@RequestBody Map<String, Object> requestBody) {
         Long roomId = Long.parseLong(requestBody.get("roomId").toString());
         String password = requestBody.get("password").toString();
-        return roomServices.checkPassword(roomId, password);
+        if(roomServices.checkPassword(roomId, password))
+            return ResponseEntity.ok("success");
+        else return new ResponseEntity<>("Incorrect password", HttpStatus.UNAUTHORIZED);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
