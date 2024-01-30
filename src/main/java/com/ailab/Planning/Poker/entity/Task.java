@@ -34,22 +34,13 @@ public class Task {
     @Column(name = "estimation")
     private int estimation;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "room_id")
     private Long room_id;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "room_id" ,insertable = false, updatable = false)
+    @JoinColumn(name = "room_id", insertable = false, updatable = false)
     private Room room;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "username" ,insertable = false, updatable = false)
-    private User user;
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "task")

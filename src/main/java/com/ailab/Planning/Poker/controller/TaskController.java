@@ -28,6 +28,10 @@ public class TaskController {
     public ResponseEntity<TaskDTO> getByTaskId(@PathVariable Long id) {
         return new ResponseEntity<>(taskServices.getByTaskId(id), HttpStatus.OK);
     }
+    @GetMapping("/noRoom")
+    public ResponseEntity<List<TaskDTO>> getAddableTask(){
+        return new ResponseEntity<>(taskServices.getAddableTask(),HttpStatus.OK);
+    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,8 +45,12 @@ public class TaskController {
     }
 
     @PutMapping("/addToRoom/{id}/{roomId}")
-    public ResponseEntity<String> addToRoom(@PathVariable Long id, @PathVariable Long roomId, @RequestParam(name = "type") String type){
-        return taskServices.addToRoom(roomId,id, type);
+    public ResponseEntity<String> addToRoom(@PathVariable Long id, @PathVariable Long roomId){
+        return taskServices.addToRoom(roomId,id);
+    }
+    @PutMapping("/removeFromRoom/{id}")
+    public ResponseEntity<String> removeFromRoom(@PathVariable Long id){
+        return taskServices.removeFromRoom(id);
     }
 
     @DeleteMapping("/{id}")

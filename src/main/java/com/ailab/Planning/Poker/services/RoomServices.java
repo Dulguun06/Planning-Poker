@@ -39,16 +39,12 @@ public class RoomServices {
 
     public Boolean checkPassword(Long roomId, String password) {
         Room room = roomRepository.findById(roomId).orElse(null);
-
-        if (room != null && room.getPassword().equals(password)) {
-            return true;
-
-        } else {
-            return false;
-        }
+        return room != null && room.getPassword().equals(password);
     }
 
     public RoomDTO save(Room newRoom) {
+        roomRepository.save(newRoom);
+        newRoom.setUrl("http://localhost:5173/room/" + newRoom.getId());
         roomRepository.save(newRoom);
         return roomMapper.entityToDto(newRoom);
     }

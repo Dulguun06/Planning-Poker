@@ -1,6 +1,5 @@
 package com.ailab.Planning.Poker.services;
 
-import com.ailab.Planning.Poker.dto.TaskDTO;
 import com.ailab.Planning.Poker.dto.VoteDTO;
 import com.ailab.Planning.Poker.entity.Vote;
 import com.ailab.Planning.Poker.mapper.VoteMapper;
@@ -36,14 +35,10 @@ public class VoteServices {
         return voteMapper.entityToDto(voteRepository.findById(voteId).orElse(new Vote()));
     }
 
-    public VoteDTO save(VoteDTO newVote) {
-        Vote vote = new Vote();
-        voteMapper.dtoToEntity(newVote, vote);
-        vote = voteRepository.save(vote);
-        newVote.setId(vote.getId());
-        return newVote;
+    public VoteDTO save(Vote newVote) {
+        voteRepository.save(newVote);
+        return voteMapper.entityToDto(newVote);
     }
-
 
     public VoteDTO update(VoteDTO newVote, Long oldVoteId) {
         Optional<Vote> optionalVote = voteRepository.findById(oldVoteId);

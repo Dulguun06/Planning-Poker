@@ -1,6 +1,7 @@
 package com.ailab.Planning.Poker.controller;
 
 import com.ailab.Planning.Poker.dto.VoteDTO;
+import com.ailab.Planning.Poker.entity.Vote;
 import com.ailab.Planning.Poker.services.VoteServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class VoteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VoteDTO> save(@Valid @RequestBody VoteDTO newVote) {
+    public ResponseEntity<VoteDTO> save(@Valid @RequestBody Vote newVote) {
         return new ResponseEntity<>(voteServices.save(newVote), HttpStatus.OK);
     }
 

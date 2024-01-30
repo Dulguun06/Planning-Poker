@@ -12,7 +12,6 @@ public class TaskMapper {
         taskDTO.setId(task.getId());
         taskDTO.setTitle(task.getTitle());
         taskDTO.setDescription(task.getDescription());
-        taskDTO.setUsername(task.getUsername());
         taskDTO.setDue(task.getDue());
         taskDTO.setEstimation(task.getEstimation());
         taskDTO.setRoom_id(task.getRoom_id());
@@ -24,7 +23,6 @@ public class TaskMapper {
 
             task.setTitle(dto.getTitle());
             task.setDescription(dto.getDescription());
-            task.setUsername(dto.getUsername());
             task.setDue(dto.getDue());
             task.setEstimation(dto.getEstimation());
             task.setRoom_id(dto.getRoom_id());

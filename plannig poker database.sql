@@ -50,8 +50,8 @@ CREATE TABLE vote
 
 -- Inserting data into the room table
 INSERT INTO room (password1, room_name, url)
-VALUES ('pass123', 'Room A', 'https://rooma.example.com'),
-       ('pass456', 'Room B', 'https://roomb.example.com');
+VALUES ('123', 'Room A', 'http://localhost:5173/room/1'),
+       ('123', 'Room B', 'http://localhost:5173/room/1');
 
 -- Inserting data into the user table
 INSERT INTO user (username, image)

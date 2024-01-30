@@ -16,23 +16,16 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
 
-    @Id
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "image")
-    private String image;
-
     @JsonIgnore
     @ManyToMany
     Set<Room> joined_room;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Task> tasks;
+    @Id
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Vote> votes;
+
 }

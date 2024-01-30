@@ -7,9 +7,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-    @NotBlank(message = "Username not black")
+    @NotBlank(message = "Username not blank")
     @NotNull(message = "Username not null")
     private String username;
-
-    private String image;
 }

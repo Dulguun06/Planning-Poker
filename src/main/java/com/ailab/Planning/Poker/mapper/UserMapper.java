@@ -9,14 +9,14 @@ public class UserMapper {
     public UserDTO entityToDto(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());
-        userDTO.setImage(user.getImage());
+//        userDTO.setImage(user.getImage());
         return userDTO;
     }
 
     public void dtoToEntity(UserDTO userDTO, User user) {
         if (userDTO != null && user != null) {
             user.setUsername(userDTO.getUsername());
-            user.setImage(userDTO.getImage());
+//            user.setImage(userDTO.getImage());
         }
     }
 }

@@ -18,6 +18,9 @@ public class UserServices {
     UserRepository userRepository;
 
     @Autowired
+    RoomServices roomServices;
+
+    @Autowired
     UserMapper userMapper;
 
     public List<UserDTO> getAllUser() {
@@ -34,7 +37,8 @@ public class UserServices {
     public UserDTO save(UserDTO newUser) {
         User user = new User();
         userMapper.dtoToEntity(newUser, user);
-        return userMapper.entityToDto(userRepository.save(user));
+        userRepository.save(user);
+        return newUser;
     }
 
     public UserDTO update(UserDTO newUser, String oldUsername) {

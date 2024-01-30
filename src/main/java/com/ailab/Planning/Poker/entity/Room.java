@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +28,10 @@ public class Room {
 
     @Column(name = "url")
     private String url;
+
+    @JsonIgnore
+    @ManyToMany
+    Set<User> users;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Task> tasks;

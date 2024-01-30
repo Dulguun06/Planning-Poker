@@ -20,8 +20,6 @@ public class TaskDTO {
     @NotBlank(message = "Tasks should have detailed description")
     private String description;
 
-    private String username;
-
    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date due;
 
