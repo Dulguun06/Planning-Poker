@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -29,10 +28,29 @@ public class Room {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "capacity")
+    private Long capacity;
+
     @JsonIgnore
-    @ManyToMany
-    Set<User> users;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "room_users",
+            uniqueConstraints = @UniqueConstraint(columnNames = {"username", "room_id"}),
+            joinColumns = @JoinColumn(
+                    name = "room_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "username", referencedColumnName = "username")
+    )
+    private List<User> users;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "room", cascade = CascadeType.ALL)
     private List<Task> tasks;
+
+    public void addUser(User user) {
+        this.getUsers().add(user);
+    }
+
+    public void removeUser(User user) {
+        this.getUsers().remove(user);
+    }
 }

@@ -4,12 +4,21 @@ show databases;
 use pp;
 show tables;
 
+alter table card
+rename column image_url to url
+
 CREATE TABLE room
 (
     id        BIGINT AUTO_INCREMENT PRIMARY KEY,
     password1 VARCHAR(255) NOT NULL,
     room_name VARCHAR(255) NOT NULL,
     url       VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE card
+(
+    id        BIGINT PRIMARY KEY,
+	image_url varchar(255)
 );
 
 CREATE TABLE user
@@ -58,6 +67,21 @@ INSERT INTO user (username, image)
 VALUES ('john_doe', 'john_doe.jpg'),
        ('jane_smith', 'jane_smith.jpg'),
        ('alice_johnson', 'alice_johnson.jpg');
+       
+INSERT INTO card (id, image_url)
+VALUES 
+(0, '../images/Moon.png'),
+(1, '../images/Mercury.png'),
+(2, '../images/Mars.png'),
+(3, '../images/Venus.png'),
+(5, '../images/Earth.png'),
+(8, '../images/Neptune.png'),
+(13, '../images/Uranus.png'),
+(20, '../images/Saturn.png'),
+(40, '../images/Jupiter.png'),
+(100, '../images/Black-hole.png');
+
+select * from card
 
 -- Inserting data into the task table
 INSERT INTO task (title, description1, due, estimation, username, room_id)
@@ -68,10 +92,7 @@ VALUES ('Task 1', 'Description for Task 1', '2022-01-20 15:30:00.000000', 5, 'jo
 
 -- Inserting data into the vote table
 INSERT INTO vote (estimation, task_id, username)
-VALUES (5, 1, 'john_doe'),
-       (8, 2, 'jane_smith'),
-       (3, 3, 'john_doe'),
-       (7, 4, 'alice_johnson');
+VALUES (5, 1, 'Dulguun');
 
 
 SELECT *
@@ -85,6 +106,9 @@ FROM room;
 
 SELECT *
 FROM vote;
+
+select *
+from user_joined_room;
 
 show create table task;
 show create table user;

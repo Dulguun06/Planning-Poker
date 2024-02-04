@@ -4,6 +4,8 @@ import com.ailab.Planning.Poker.dto.VoteDTO;
 import com.ailab.Planning.Poker.entity.Vote;
 import com.ailab.Planning.Poker.services.VoteServices;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,8 @@ public class VoteController {
     @Autowired
     VoteServices voteServices;
 
+    private final Logger logger = LoggerFactory.getLogger(VoteController.class);
+
     @GetMapping("")
     public ResponseEntity<List<VoteDTO>> getAll() {
         return new ResponseEntity<>(voteServices.getAllVote(), HttpStatus.OK);
@@ -30,9 +34,14 @@ public class VoteController {
         return new ResponseEntity<>(voteServices.getByVoteId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/task/{id}")
+    public ResponseEntity<List<Vote>> getByTaskId(@PathVariable Long id) {
+        return new ResponseEntity<>(voteServices.getByTaskId(id), HttpStatus.OK);
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<VoteDTO> save(@Valid @RequestBody Vote newVote) {
+    public ResponseEntity<VoteDTO> save(@RequestBody Vote newVote) {
         return new ResponseEntity<>(voteServices.save(newVote), HttpStatus.OK);
     }
 

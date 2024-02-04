@@ -17,5 +17,5 @@ public class VoteDTO {
     @NotBlank(message = "Username should have detailed description")
     private String username;
 
-    private int estimation;
+    private Long estimation;
 }

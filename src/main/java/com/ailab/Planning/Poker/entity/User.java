@@ -17,8 +17,8 @@ import java.util.Set;
 public class User {
 
     @JsonIgnore
-    @ManyToMany
-    Set<Room> joined_room;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Room> rooms;
 
     @Id
     @Column(name = "username", nullable = false, unique = true)

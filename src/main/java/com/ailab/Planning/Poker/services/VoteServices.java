@@ -61,4 +61,8 @@ public class VoteServices {
             return HttpStatus.NOT_FOUND;
         }
     }
+
+    public List<Vote> getByTaskId(Long id) {
+        return voteRepository.findAllByTaskId(id);
+    }
 }

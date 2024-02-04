@@ -12,6 +12,8 @@ public class RoomMapper {
         roomDTO.setId(room.getId());
         roomDTO.setRoom_name(room.getRoom_name());
         roomDTO.setUrl(room.getUrl());
+        roomDTO.setCapacity(room.getCapacity());
+        roomDTO.setJoinedUsers(room.getUsers().size());
         return roomDTO;
     }
 
@@ -19,6 +21,7 @@ public class RoomMapper {
         if (dto != null && room != null) {
             room.setRoom_name(dto.getRoom_name());
             room.setUrl(dto.getUrl());
+            room.setCapacity(dto.getCapacity());
         }
     }
 }

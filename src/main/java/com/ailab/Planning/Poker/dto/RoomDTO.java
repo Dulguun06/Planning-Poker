@@ -14,4 +14,8 @@ public class RoomDTO {
     private String room_name;
 
     private String url;
+
+    private Long capacity;
+
+    private int joinedUsers;
 }

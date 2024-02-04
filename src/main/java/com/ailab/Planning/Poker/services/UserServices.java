@@ -18,9 +18,6 @@ public class UserServices {
     UserRepository userRepository;
 
     @Autowired
-    RoomServices roomServices;
-
-    @Autowired
     UserMapper userMapper;
 
     public List<UserDTO> getAllUser() {
@@ -32,6 +29,9 @@ public class UserServices {
 
     public UserDTO getByUserName(String userName) {
         return userMapper.entityToDto(userRepository.findById(userName).orElse(new User()));
+    }
+    public User getInfoByUserName(String userName) {
+        return userRepository.findById(userName).orElse(null);
     }
 
     public UserDTO save(UserDTO newUser) {
