@@ -43,6 +43,10 @@ public class TaskController {
     public ResponseEntity<TaskDTO> updateTask(@Valid @RequestBody final TaskDTO updatedTask, @PathVariable Long id) {
         return new ResponseEntity<>(taskServices.update(updatedTask, id), HttpStatus.OK);
     }
+    @PutMapping("estimate/{id}")
+    public ResponseEntity<TaskDTO> estimate(@PathVariable Long id){
+        return new ResponseEntity<>(taskServices.estimate(id),HttpStatus.OK);
+    }
 
     @PutMapping("/addToRoom/{id}/{roomId}")
     public ResponseEntity<String> addToRoom(@PathVariable Long id, @PathVariable Long roomId){

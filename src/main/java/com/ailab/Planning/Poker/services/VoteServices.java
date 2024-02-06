@@ -4,7 +4,6 @@ import com.ailab.Planning.Poker.dto.VoteDTO;
 import com.ailab.Planning.Poker.entity.Vote;
 import com.ailab.Planning.Poker.mapper.VoteMapper;
 import com.ailab.Planning.Poker.repository.VoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,6 @@ import java.util.stream.Collectors;
 public class VoteServices {
     private final VoteRepository voteRepository;
     private final VoteMapper voteMapper;
-    @Autowired
-    TaskServices taskServices;
 
     public VoteServices(VoteRepository voteRepository, VoteMapper voteMapper) {
         this.voteRepository = voteRepository;
@@ -64,5 +61,18 @@ public class VoteServices {
 
     public List<Vote> getByTaskId(Long id) {
         return voteRepository.findAllByTaskId(id);
+    }
+
+    public List<Long> getByUsername(String username){
+        return voteRepository.findAllByUsername(username);
+    }
+
+    public Long getEstimationByTaskId(Long taskId){
+        List<Long> estimations = voteRepository.getEstimationByTaskId(taskId);
+        Long sum =0L;
+        for (Long estimation : estimations) {
+            sum += estimation;
+        }
+        return Math.round(estimations.isEmpty() ? 0 : (double) sum / estimations.size());
     }
 }

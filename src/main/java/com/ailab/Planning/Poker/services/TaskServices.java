@@ -2,8 +2,10 @@ package com.ailab.Planning.Poker.services;
 
 import com.ailab.Planning.Poker.dto.TaskDTO;
 import com.ailab.Planning.Poker.entity.Task;
+import com.ailab.Planning.Poker.entity.Vote;
 import com.ailab.Planning.Poker.mapper.TaskMapper;
 import com.ailab.Planning.Poker.repository.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServices {
 
+    @Autowired
+    VoteServices voteServices;
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
 
@@ -87,4 +91,13 @@ public class TaskServices {
         } else return new ResponseEntity<>("Failed to Remove", HttpStatus.NOT_FOUND);
     }
 
+    public TaskDTO estimate(Long id) {
+       Task task = taskRepository.findById(id).orElse(null);
+       if(task!=null){
+           task.setEstimation(voteServices.getEstimationByTaskId(id));
+           taskRepository.save(task);
+           return taskMapper.entityToDto(task);
+       }
+       else return null;
+    }
 }

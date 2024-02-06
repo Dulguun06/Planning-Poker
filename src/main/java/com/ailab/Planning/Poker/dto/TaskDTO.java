@@ -24,7 +24,7 @@ public class TaskDTO {
    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date due;
 
-    private int estimation;
+    private Long estimation;
 
     private Long room_id;
 }

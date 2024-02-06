@@ -4,6 +4,8 @@ import com.ailab.Planning.Poker.dto.VoteDTO;
 import com.ailab.Planning.Poker.entity.Vote;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class VoteMapper {
     public VoteDTO entityToDto(Vote vote) {
@@ -21,5 +23,9 @@ public class VoteMapper {
             vote.setUsername(dto.getUsername());
             vote.setEstimation(dto.getEstimation());
         }
+    }
+
+    public Long voteToTaskId(Vote vote){
+        return vote.getTaskId();
     }
 }

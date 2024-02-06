@@ -32,7 +32,7 @@ public class Task {
     private Date due;
 
     @Column(name = "estimation")
-    private int estimation;
+    private Long estimation;
 
     @Column(name = "room_id")
     private Long room_id;

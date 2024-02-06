@@ -39,6 +39,11 @@ public class VoteController {
         return new ResponseEntity<>(voteServices.getByTaskId(id), HttpStatus.OK);
     }
 
+    @GetMapping("/voted/{username}")
+    public ResponseEntity<List<Long>> getByTaskId(@PathVariable String username) {
+        return new ResponseEntity<>(voteServices.getByUsername(username), HttpStatus.OK);
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<VoteDTO> save(@RequestBody Vote newVote) {
