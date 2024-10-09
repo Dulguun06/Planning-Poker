@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-
-//    @Query("select t  from Task as t where t.room_id = :id")
     List<Task> findAllByRoom_id(Long roomId);
 
 }
